@@ -31,11 +31,11 @@ BUTTON_MARGIN_Y = 4 # 按钮垂直边距
 # ------------------ 核心类定义（封装状态与方法） ------------------
 
 class ColorThresholdConfig:
-    def __init__(self, cam, disp, ts, thresholds): # 初始化硬件
+    def __init__(self, cam, disp, ts, threshold): # 初始化硬件
         self.cam = cam
         self.disp = disp
         self.ts = ts
-        self.threshold = thresholds[0]
+        self.threshold = threshold[0]
 
         # 状态变量
         self.lab_params = {
@@ -231,7 +231,7 @@ class ColorThresholdConfig:
             # 显示图像
             self.disp.show(img)
 
-        return current_threshold
+        return [list(current_threshold)]
 
     def run_blob_detection(self, threshold):
         """运行色块检测模式（调整完成后）"""

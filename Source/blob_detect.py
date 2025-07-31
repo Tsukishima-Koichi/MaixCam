@@ -1,5 +1,5 @@
 class BlobDetector:
-    def __init__(self, threshold, pixels_threshold=200):
+    def __init__(self, threshold, pixels_threshold=1000):
         """
         初始化色块检测器
         :param threshold: 颜色阈值列表，格式为 [(Lmin, Lmax, Amin, Amax, Bmin, Bmax)]
@@ -52,9 +52,9 @@ class BlobDetector:
                 self.blob_center[0] - self.image_center[0],
                 self.blob_center[1] - self.image_center[1]
             )
-            return self.blob_center, self.distance
+            return self.blob_center, self.distance, max_blob
 
-        return None
+        return None, None, None
 
     def sliding_filter(self, data_x, data_y):
         # 将新数据存入滑动窗口

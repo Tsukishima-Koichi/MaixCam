@@ -9,7 +9,6 @@ class MenuInterface:
         # 状态标志
         # self.red_flag = False
         # self.blue_flag = False
-        self.white_flag = False
         self.black_flag = False
         self.start_flag = False
         
@@ -19,12 +18,10 @@ class MenuInterface:
         self.img.draw_rect(0, 0, self.img.width(), self.img.height(), image.COLOR_WHITE)
         # self.red_btn_pos = None
         # self.blue_btn_pos = None
-        self.white_btn_pos = None
         self.black_btn_pos = None
         self.start_btn_pos = None
         # self.red_btn_disp_pos = None
         # self.blue_btn_disp_pos = None
-        self.white_btn_disp_pos = None
         self.black_btn_disp_pos = None
         self.start_btn_disp_pos = None
         
@@ -42,19 +39,12 @@ class MenuInterface:
         self.img.draw_string(8, 12, start_label, image.COLOR_WHITE)
         self.img.draw_rect(*self.start_btn_pos, image.COLOR_WHITE, 2)
 
-        # 绘制黑色按钮
+        # 绘制红色按钮
         black_label = "B"
         black_size = image.string_size(black_label)
         self.black_btn_pos = [0, 12*2 + start_size.height(), 8*2 + black_size.width(), 12*2 + black_size.height()]
         self.img.draw_string(8, 12*3 + start_size.height(), black_label, image.COLOR_WHITE)
         self.img.draw_rect(*self.black_btn_pos, image.COLOR_WHITE, 2)
-
-        # 绘制白色按钮
-        white_label = "W"
-        white_size = image.string_size(white_label)
-        self.white_btn_pos = [0, 12*4 + black_size.height() + start_size.height(), 8*2 + white_size.width(), 12*2 + white_size.height()]
-        self.img.draw_string(8, 12*5 + black_size.height() + start_size.height(), white_label, image.COLOR_WHITE)
-        self.img.draw_rect(*self.white_btn_pos, image.COLOR_WHITE, 2)
         
         # # 绘制红色按钮
         # red_label = "R"
@@ -85,11 +75,6 @@ class MenuInterface:
             self.disp.width(), self.disp.height(),
             image.Fit.FIT_CONTAIN, *self.black_btn_pos
         )
-        self.white_btn_disp_pos = image.resize_map_pos(
-            self.img.width(), self.img.height(),
-            self.disp.width(), self.disp.height(),
-            image.Fit.FIT_CONTAIN, *self.white_btn_pos
-        )
         # self.red_btn_disp_pos = image.resize_map_pos(
         #     self.img.width(), self.img.height(),
         #     self.disp.width(), self.disp.height(),
@@ -112,7 +97,6 @@ class MenuInterface:
         if pressed:
             # self.red_flag = self.is_in_button(x, y, self.red_btn_disp_pos)
             # self.blue_flag = self.is_in_button(x, y, self.blue_btn_disp_pos)
-            self.white_flag = self.is_in_button(x, y, self.white_btn_disp_pos)
             self.black_flag = self.is_in_button(x, y, self.black_btn_disp_pos)
             self.start_flag = self.is_in_button(x, y, self.start_btn_disp_pos)
         return self.black_flag, self.start_flag
@@ -132,11 +116,7 @@ class MenuInterface:
             black_size = image.string_size(black_label)
             background_img.draw_string(8, 12*3 + start_size.height(), black_label, image.COLOR_WHITE)
             background_img.draw_rect(*self.black_btn_pos, image.COLOR_WHITE, 2)
-            # 绘制白色按钮
-            white_label = "W"
-            white_size = image.string_size(white_label)
-            background_img.draw_string(8, 12*5 + black_size.height() + start_size.height(), white_label, image.COLOR_WHITE)
-            background_img.draw_rect(*self.white_btn_pos, image.COLOR_WHITE, 2)
+
             
             # # 绘制蓝色按钮
             # blue_label = "B"
@@ -156,8 +136,7 @@ class MenuInterface:
 
     def get_flags(self):
         # 获取当前按钮状态
-        return self.white_flag, self.black_flag, self.start_flag
-
+        return self.black_flag, self.start_flag
 
 
 

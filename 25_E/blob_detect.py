@@ -19,16 +19,19 @@ class BlobDetector:
     def set_threshold(self, threshold):
         self.threshold = threshold
 
-    def detect_max_blob(self, img):
+    def detect_max_blob(self, img, roi=None):
         """
         检测图像中最大的色块并计算距离
         :param img: 输入图像对象
         :return: 成功返回 (中心点坐标, 距离元组)，失败返回 None
         """
+        if roi is None:
+            roi = (0, 0, img.width(), img.height())  # 默认全图像区域
         # 查找所有符合阈值的色块
         blobs = img.find_blobs(
             self.threshold,
-            pixels_threshold=self.pixels_threshold
+            pixels_threshold=self.pixels_threshold,
+            roi=roi
         )
 
         # 找出最大的色块
